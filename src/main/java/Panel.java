@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URISyntaxException;
 
 
 public class Panel extends JPanel {
@@ -10,14 +11,16 @@ public class Panel extends JPanel {
 
     private Scene2D scene2D;
 
-    public Panel() {
+    public Panel() throws URISyntaxException {
         scene2D = new Scene2D();
         setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
         setBackground(Color.WHITE);
+        setFocusable(true);
         addComponentListener(new ComponentControl());
         addMouseListener(new MouseControl());
         addMouseWheelListener(new MouseControl());
         addMouseMotionListener(new MouseControl());
+        addKeyListener(new KeyboardControl());
     }
 
     @Override
@@ -105,6 +108,24 @@ public class Panel extends JPanel {
             System.out.printf("Mouse wheel moved. Rotation: %s \n", scale);
             scene2D.scaling(scale, scene2D.screenToWorldX(e.getX()), scene2D.screenToWorldY(e.getY()));
             repaint();
+        }
+    }
+
+    private class KeyboardControl implements KeyListener{
+        @Override
+        public void keyTyped(KeyEvent e) {
+            System.out.printf("KeyTyped: Char: %s, Code: %s\n", e.getKeyChar(), e.getKeyCode());
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            System.out.printf("KeyPressed: Char: %s, Code: %s\n", e.getKeyChar(), e.getKeyCode());
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            System.out.printf("KeyReleased: Char: %s, Code: %s\n", e.getKeyChar(), e.getKeyCode());
+
         }
     }
 }

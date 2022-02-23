@@ -1,7 +1,8 @@
 import javax.swing.*;
+import java.net.URISyntaxException;
 
 public class Application {
-    public static void setupAndRunApplication() {
+    public static void setupAndRunApplication() throws URISyntaxException {
         JFrame frame = new JFrame();
         Panel panel = new Panel();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -10,7 +11,7 @@ public class Application {
         frame.pack();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws URISyntaxException {
         setupAndRunApplication();
     }
 }

@@ -1,7 +1,3 @@
-package model;
-
-import matrix.Matrix;
-
 public record HomogeneousCoordinates(double u1, double u2, double u3) {
     public double getX() {
         return u1 / u3;
