@@ -1,3 +1,8 @@
+package model;
+
+import matrix.Matrix;
+import vizualization.Scene2D;
+
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,10 +19,10 @@ public class Model2D {
 
     private Matrix accumulatedAffineTransform;
 
-    public Model2D(Path/*String*/ pathToMatrixOfVertices, Path /*String*/ pathToMatrixOfEdges) {
+    public Model2D(Path pathToMatrixOfVertices, Path pathToMatrixOfEdges) {
         try {
-            verticesMatrix = covertDoubleToHomCoordinates(importFromFile(/*Path.of(*/pathToMatrixOfVertices/*)*/));
-            edgesMatrix = convertDoubleToInt2DArray(importFromFile(/*Path.of(*/pathToMatrixOfEdges/*)*/));
+            verticesMatrix = covertDoubleToHomCoordinates(importFromFile(pathToMatrixOfVertices));
+            edgesMatrix = convertDoubleToInt2DArray(importFromFile(pathToMatrixOfEdges));
             currentVerticesMatrix = verticesMatrix;
         } catch (IOException exception) {
             System.err.println("Something wrong with file!");
@@ -73,4 +78,5 @@ public class Model2D {
                 .mapToObj(colIndex -> getColumn(array, colIndex))
                 .map(HomogeneousCoordinates::of).toArray(HomogeneousCoordinates[]::new);
     }
+
 }

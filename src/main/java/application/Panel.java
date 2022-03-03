@@ -1,3 +1,7 @@
+package application;
+
+import vizualization.Scene2D;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,7 +16,7 @@ public class Panel extends JPanel {
     private Scene2D scene2D;
 
     public Panel() throws URISyntaxException {
-        scene2D = new Scene2D();
+        scene2D = new Scene2D(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
         setBackground(Color.WHITE);
         setFocusable(true);
@@ -106,7 +110,7 @@ public class Panel extends JPanel {
             double scale = (double)(-1 * Math.signum(e.getWheelRotation()) + 2) * SCALE_COEFFICIENT;
 
             System.out.printf("Mouse wheel moved. Rotation: %s \n", scale);
-            scene2D.scaling(scale, scene2D.screenToWorldX(e.getX()), scene2D.screenToWorldY(e.getY()));
+            scene2D.scaling(scale, e.getX(), e.getY());
             repaint();
         }
     }
@@ -120,12 +124,13 @@ public class Panel extends JPanel {
         @Override
         public void keyPressed(KeyEvent e) {
             System.out.printf("KeyPressed: Char: %s, Code: %s\n", e.getKeyChar(), e.getKeyCode());
+            scene2D.process(Character.toLowerCase(e.getKeyChar()));
+            repaint();
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
             System.out.printf("KeyReleased: Char: %s, Code: %s\n", e.getKeyChar(), e.getKeyCode());
-
         }
     }
 }

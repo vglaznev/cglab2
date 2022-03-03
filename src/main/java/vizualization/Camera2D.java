@@ -1,3 +1,5 @@
+package vizualization;
+
 import java.awt.*;
 
 public class Camera2D {
@@ -49,13 +51,13 @@ public class Camera2D {
 
     private double posX, posY;  // Позиция графического курсора в мировых координатах (для функций MoveTo и LineTo)
 
-    public Camera2D() {
-        this.x0 = Panel.DEFAULT_WIDTH / 2;
-        this.y0 = Panel.DEFAULT_HEIGHT / 2;
+    public Camera2D(int width, int height) {
+        this.x0 = width / 2;
+        this.y0 = height / 2;
         this.pX = DEFAULT_PX;
         this.pY = DEFAULT_PY;
-        this.width = Panel.DEFAULT_WIDTH;
-        this.height = Panel.DEFAULT_HEIGHT;
+        this.width = width;
+        this.height = height;
     }
 
     public void setOrigin(int x, int y){
@@ -102,9 +104,9 @@ public class Camera2D {
         posY = 0;
     }
 
-    public void scaling(double scale, double xWorld, double yWorld) {
-        x0 = x0 - (scale - 1) * pX * xWorld;
-        y0 = y0 - (scale - 1) * pY * yWorld;
+    public void scaling(double scale, int xScreen, int yScreen) {
+        x0 = x0 - (scale - 1) * pX * screenToWorldX(xScreen);
+        y0 = y0 - (scale - 1) * pY * screenToWorldY(yScreen);
         pX = scale * pX;
         pY = scale * pY;
         printParameters();

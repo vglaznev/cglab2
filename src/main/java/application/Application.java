@@ -1,3 +1,5 @@
+package application;
+
 import javax.swing.*;
 import java.net.URISyntaxException;
 
